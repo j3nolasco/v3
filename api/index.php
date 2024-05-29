@@ -18,7 +18,7 @@ $Rentry = $data['Report_Entry'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>v3</title>
 </head>
 <body>
 <div class = "course-catalog"> 
@@ -151,7 +151,8 @@ $Rentry = $data['Report_Entry'];
                                     </div>
                                     <div class = "course-card_R">
                                         <p class = "meeting-pattern"><?=$MeetingPattern ?></p> 
-                                        <p class = "academic_level"><?=$AcademicLevel ?></p>   
+                                        <p class = "academic_level"><?=$AcademicLevel ?></p>
+                                          <p id = "indicator" class = "indicator">^</p> 
                                     </div>
                                     <div id = "slide-info"class = "slide-info" style="display:none">
                                         <p> <?=$AcademicPeriod ?></p> 
@@ -336,20 +337,21 @@ $Rentry = $data['Report_Entry'];
         var exit =document.getElementById("leave");
         var list =document.getElementById("list");
         var div = list.getElementsByClassName("course-card");
-        var trigger = false;
+        var indicator = document.getElementsByClassName("indicator");
         var parent  = e.id;
 
         for(i=0; i < slideinfo.length; i++){          
             if(i == parent && slideinfo[i].style.display == "none")
             {
                 slideinfo[i].style.transition = "all 2s ease-in-out"; 
-                slideinfo[i].style.display = "block";    
+                slideinfo[i].style.display = "block";   
                 console.log("I am drilling");   
-                trigger = true;   
+                indicator[i].style.transform  = 'rotate('+180+'deg)'; 
             }
             else if(i == parent && slideinfo[i].style.display == "block")
             {
                 slideinfo[i].style.display = "none";
+                indicator[i].style.transform  = 'rotate('+360+'deg)'; 
                 console.log("I am closing"); 
             }
             
@@ -456,6 +458,11 @@ body{
 
 .course-card_L{
     grid-column: 1;
+}
+.indicator{
+   position:absolute;
+    bottom:1;
+    right:1;
 }
 .course-card_R{
     grid-column: 2;
