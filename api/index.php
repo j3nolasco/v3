@@ -46,28 +46,10 @@ $Rentry = $data['Report_Entry'];
                          <?php
                          }?>
                 </select>
-                <h1>Delivery Mode</h1>
-                <select name="delivery-mode" id="inputMode"  >
-                    <option value="" disabled selected> Select Delivery Mode </option>
-                <?php
-                         $new_array = array();
-                         for ( $i = 0; $i < $arrayCount; $i++ ){
-                             $firstReport = $Rentry[$i];
-                             $DeliveryMode = $firstReport['Delivery_Mode'];
-                             if(!in_array($DeliveryMode, $new_array)){ 
-                                  $new_array[$i] = $DeliveryMode;
-                                  $DeliveryMode = $new_array[$i];
-                                  ?>
-                                  <option value="<?=$DeliveryMode ?>"><?=$DeliveryMode ?></option>"
-                                  <?php
-                                }
-                             ?>                           
-                         <?php
-                         }?>
-                </select>
+                
                 <h1>Academic Level</h1>
                 <select name="delivery-mode" id="inputAcademic"  >
-                    <option value="" disabled selected> Select Delivery Mode </option>
+                    <option value="Undergraduate" disabled selected> Select Delivery Mode </option>
                 <?php
                          $new_array = array();
                          for ( $i = 0; $i < $arrayCount; $i++ ){
@@ -232,13 +214,25 @@ $Rentry = $data['Report_Entry'];
     const div = list.getElementsByClassName("course-card");
     var sels =document.getElementsByTagName('select');
     var filterArray = [];
-    var newArray = false;
-    var silde = false;
+    var serachValue = "";
+
+    var courseSerach= false;
+    var ap = false;
+    var dm = false;
+    var al = false;
+    var mp = false;
+    var selected_Period = document.getElementById("inputPeriod").value.toUpperCase();   
+    var selected_Academic = document.getElementById("inputAcademic").value.toUpperCase();
+
+    var apSelection = "";
+    var dmSelection = "";
+    var alSelection = "";
 
     function resetValues(){
         const filter = Textinput.value.toUpperCase();
         const list =document.getElementById("list");
         const div = list.getElementsByClassName("course-card");
+        Textinput.value = "";
       for(i=0; i<sels.length; i++){
         sels[i].selectedIndex=0;
       }
@@ -253,74 +247,252 @@ $Rentry = $data['Report_Entry'];
         }
     
 
+        //filter dropdowns -----------------------------------------------------------------------------------------------------------------
+
         for(j=0; j<sels.length; j++){
           sels[j].addEventListener('change', function(){
             selectionId = this.id;
-            
+
+            var selectedPeriod =document.getElementById("inputPeriod").value.toUpperCase();
+            var selectedAcademic = document.getElementById("inputAcademic").value.toUpperCase();
+
+                        
             if(selectionId === "inputPeriod")
             {
-                var selectedPeriod =document.getElementById("inputPeriod").value.toUpperCase();
-                            
+                ap = true;
+                if(courseSerach == true)
+                {
+                    if ( al ){
+                    
+                    for(i = 0; i<filterArray.length; i++)
+                  {
+                      const h3 = filterArray[i].getElementsByTagName("h3")[0];
+                      const p = filterArray[i].getElementsByTagName("p")[2];
+                      const als = filterArray[i].getElementsByTagName("p")[6];
+                      
+                   
+                      if((p.innerHTML.toUpperCase() == selectedPeriod) && (als.innerHTML.toUpperCase() == selectedAcademic))
+                      {
+                        filterArray[i].style.display = "";
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+
+                      }else{
+                        filterArray[i].style.display = "none";
+                      }
+                  } 
+                }else{
+                
+                  for(i = 0; i<filterArray.length; i++)
+                  {
+                      const p = filterArray[i].getElementsByTagName("p")[2];
+                      
+                       
+                      if(p.innerHTML.toUpperCase() == selectedPeriod)
+                      {
+                        filterArray[i].style.display = "";
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+                        //console.log("P: "+p.innerHTML);
+
+                      }else{
+                        filterArray[i].style.display = "none";
+                      }
+                  }    
+                } 
+                }else{
+                    if ( al ){
+                    
+                    for(i = 0; i<div.length; i++)
+                  {
+                      const h3 = div[i].getElementsByTagName("h3")[0];
+                      const p = div[i].getElementsByTagName("p")[2];
+                      const als = div[i].getElementsByTagName("p")[6];
+                      
+                   
+                      if((p.innerHTML.toUpperCase() == selectedPeriod) && (als.innerHTML.toUpperCase() == selectedAcademic))
+                      {
+                        div[i].style.display = "";
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+
+                      }else{
+                        div[i].style.display = "none";
+                      }
+                  } 
+                }else{
+                
                   for(i = 0; i<div.length; i++)
                   {
                       const p = div[i].getElementsByTagName("p")[2];
+                      
                        
                       if(p.innerHTML.toUpperCase() == selectedPeriod)
                       {
                         div[i].style.display = "";
-                        filterArray.push(div[i]);
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+                        //console.log("P: "+p.innerHTML);
 
                       }else{
                         div[i].style.display = "none";
                       }
-                  }       
+                  }    
+                } 
+                }
+                  
             }
-            if(selectionId === "inputMode")
-            {
-              var selectedMode = document.getElementById("inputMode").value.toUpperCase();
-              for(var i =0; i<div.length; i++)
-              {
-                console.log("new arra: "+div[i]); 
-                    const p = div[i].getElementsByTagName("p")[4];
-                        
-                      if(p.innerHTML.toUpperCase() == selectedMode)
-                      {
-                        div[i].style.display = "";
-
-                      }else{
-                        div[i].style.display = "none";
-                      }
-              }
-            }
+            
             if(selectionId === "inputAcademic")
             {
-              var selectedAcademic = document.getElementById("inputAcademic").value.toUpperCase();
-              for(var i =0; i<div.length; i++)
+              al = true;
+              if(courseSerach == true)
               {
+                if(ap)
+              {
+
+                for(var i =0; i<filterArray.length; i++)
+                {
+                    const h3 = filterArray[i].getElementsByTagName("h3")[0];
+                    const ap = filterArray[i].getElementsByTagName("p")[2];
+                    const p = filterArray[i].getElementsByTagName("p")[6];
+
+                        
+                      if( (ap.innerHTML.toUpperCase() == selectedPeriod) && (p.innerHTML.toUpperCase() == selectedAcademic))
+                      {
+                        filterArray[i].style.display = "";
+                       alSelection = p.innerHTML;
+                       selected_Academic = selectedAcademic;
+
+                      }else{
+                        filterArray[i].style.display = "none";
+                      }
+                }
+
+              }else{
+                for(var i =0; i<filterArray.length; i++)
+                {
                
-                    const p = div[i].getElementsByTagName("p")[12];
-                    console.log("new arra: "+p.innerHTML);   
+                    const p = filterArray[i].getElementsByTagName("p")[6];
+                    
+                      if(p.innerHTML.toUpperCase() == selectedAcademic)
+                      {
+                        filterArray[i].style.display = "";
+                        alSelection = p.innerHTML;
+                        selected_Academic = selectedAcademic;
+
+                      }else{
+                        filterArray[i].style.display = "none";
+                      }
+                }
+              }
+              }else{
+                if(ap)
+              {
+
+                for(var i =0; i<div.length; i++)
+                {
+                    const h3 = div[i].getElementsByTagName("h3")[0];
+                    const ap = div[i].getElementsByTagName("p")[2];
+                    const p = div[i].getElementsByTagName("p")[6];
+
+                        
+                      if( (ap.innerHTML.toUpperCase() == selectedPeriod) && (p.innerHTML.toUpperCase() == selectedAcademic))
+                      {
+                       div[i].style.display = "";
+                       alSelection = p.innerHTML;
+                       selected_Academic = selectedAcademic;
+
+                      }else{
+                        div[i].style.display = "none";
+                      }
+                }
+
+              }else{
+                for(var i =0; i<div.length; i++)
+                {
+               
+                    const p = div[i].getElementsByTagName("p")[6];
+                    
                       if(p.innerHTML.toUpperCase() == selectedAcademic)
                       {
                         div[i].style.display = "";
+                        alSelection = p.innerHTML;
+                        selected_Academic = selectedAcademic;
 
                       }else{
                         div[i].style.display = "none";
                       }
+                }
               }
+              }   
+            }
+            if(selectionId === "inputMP")
+            {
+                mp = true;
+                if (dm || al ||ap){
+                    
+                    for(i = 0; i<div.length; i++)
+                  {
+                      const h3 = div[i].getElementsByTagName("h3")[0];
+                      const p = div[i].getElementsByTagName("p")[2];
+                      const dms = div[i].getElementsByTagName("p")[4];
+                      const als = div[i].getElementsByTagName("p")[10];
+                      
+                   
+                      if((p.innerHTML.toUpperCase() == selectedPeriod) && (dms.innerHTML.toUpperCase() == selectedMode) && (als.innerHTML.toUpperCase() == selectedAcademic))
+                      {
+                        div[i].style.display = "";
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+
+                      }else{
+                        div[i].style.display = "none";
+                      }
+                  } 
+                }else{
+                
+                  for(i = 0; i<div.length; i++)
+                  {
+                      const p = div[i].getElementsByTagName("p")[8];
+                      
+                       
+                      if(p.innerHTML.toUpperCase().indexOf(selectedPeriod) > -1)
+                      {
+                        div[i].style.display = "";
+                        apSelection = p.innerHTML;
+                        selected_Period =selectedPeriod;
+                        //console.log("P: "+p.innerHTML);
+
+                      }else{
+                        div[i].style.display = "none";
+                      }
+                  }    
+                }   
             }
           }, false);}
+
+          // end of drop downs----------------------------------------------------------------------------------------------------------
    
-    function filterByName(){
-        const filter = Textinput.value.toUpperCase();
-        const list =document.getElementById("list");
-        const div = list.getElementsByClassName("course-card");
-        
-      
+function filterByName(){
+    const filter = Textinput.value.toUpperCase();
+    const list =document.getElementById("list");
+    var div = list.getElementsByClassName("course-card");
+    console.log(courseSerach)
+    filterArray = [];
+
+    serachValue =filter;
+
+      if(al ||  ap)
+      {
         for(i=0; i < div.length; i++){
             const h3 = div[i].getElementsByTagName("h3")[0];
-            if(h3){
-                if(h3.innerHTML.toUpperCase().indexOf(filter) > -1){
+            const ap = div[i].getElementsByTagName("p")[2];
+            const ins = div[i].getElementsByTagName("p")[4];
+            const als = div[i].getElementsByTagName("p")[6];   
+
+            if((h3)){
+                if(((h3.innerHTML.toUpperCase().indexOf(filter) > -1) ||  (ins.innerHTML.toUpperCase().indexOf(filter) > -1)) && (ap.innerHTML.toUpperCase() == selected_Period) && (als.innerHTML.toUpperCase() == selected_Academic)){
                     div[i].style.display = "";
                    
                 } else {
@@ -329,6 +501,25 @@ $Rentry = $data['Report_Entry'];
                 }
             }
         }
+    } else{
+        
+        for(i=0; i < div.length; i++){
+            const h3 = div[i].getElementsByTagName("h3")[0];
+            const ins = div[i].getElementsByTagName("p")[4];
+            //console.log("p: "+ ins.innerHTML);
+            
+            if(h3 || ins){
+                if(h3.innerHTML.toUpperCase().indexOf(filter) > -1 || ins.innerHTML.toUpperCase().indexOf(filter) > -1){
+                    div[i].style.display = "";
+                    courseSerach = true;
+                    filterArray.push(div[i]);
+                } else {
+                    div[i].style.display = "none";
+                    courseSerach = true;
+                }
+            }
+        }
+    } 
         
     }
     function drillSlide(e){
