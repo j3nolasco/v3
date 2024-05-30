@@ -35,7 +35,7 @@ for( $i=0; $i < 1; $i++){
                 <h1 class = "filter">Filter</h1>
                 <input type="text" id="myInput" onkeyup="filterByName(this)" placeholder="Search for courses...">
                 <h1>academic-period</h1>
-                <select name="academic-periods" id="inputPeriod" >
+                <select class="academic-periods" name="academic-periods" id="inputPeriod" >
                     <option value="<?=$Temp ?>" disabled selected> Select Academic Period </option>
                 <?php
                          $new_array = array();
@@ -55,7 +55,7 @@ for( $i=0; $i < 1; $i++){
                 </select>
                 
                 <h1>Academic Level</h1>
-                <select name="delivery-mode" id="inputAcademic"  >
+                <select class="academic-level" name="academic-level" id="inputAcademic"  >
                     <option value="Undergraduate" disabled selected> Select Delivery Mode </option>
                 <?php
                          $new_array = array();
@@ -75,6 +75,7 @@ for( $i=0; $i < 1; $i++){
                 </select>
                 <br></br>
                 <button onclick="resetValues()">reset</button>
+                <button class="print" onclick="printPage()">print</button>
             </div>
         </div>
     </section>
@@ -234,8 +235,10 @@ for( $i=0; $i < 1; $i++){
     var apSelection = "";
     var dmSelection = "";
     var alSelection = "";
-
-    function resetValues(){
+function printPage(){
+    window.print();
+}
+function resetValues(){
         const filter = Textinput.value.toUpperCase();
         const list =document.getElementById("list");
         const div = list.getElementsByClassName("course-card");
@@ -530,7 +533,7 @@ function filterByName(){
     } 
         
     }
-    function drillSlide(e){
+function drillSlide(e){
         var slide =document.getElementById("slide-info");
         var slideinfo = document.getElementsByClassName("slide-info");
         var exit =document.getElementById("leave");
@@ -556,7 +559,7 @@ function filterByName(){
             
         }
     }
-    function drillBox(element){
+function drillBox(element){
         const shadow =document.getElementById("shadow");
         const exit =document.getElementById("leave");
         const drillDown =document.getElementById("drill");
@@ -581,9 +584,8 @@ function filterByName(){
                 drillInfo[i].style.display = "none";
             }
         }
-    }
-   
-    function closeDrill(element){
+    }   
+function closeDrill(element){
         const slide =document.getElementById("slide-info");
         var slideinfo = document.getElementsByClassName("slide-info");
         var parent  = element.id;
@@ -708,13 +710,39 @@ body{
     box-shadow: 0 0 0 99999px rgba(0, 0, 0, .5);
 }
 
-
+@media print{
+    .course-catalog{
+        display: block;
+}
+.title{
+    display: none;
+}
+    .left{
+        display: none !important;
+    }
+    .filter-container{
+        display: none !important;
+    }
+    .course-card{
+    display: block;
+    height: auto;
+    width: 100%;
+    }  
+    .course-card_R{
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    grid-column: 2;
+    float: left;    
+    }
+}
 
 @media screen and (max-width: 430px){
-    body{
-    margin: 0;
-    padding: 0;
+    .filter{
+    display: none;
 }
+    .print{
+        display: none;
+    }
     .course-catalog{
         display: inline-block;
         
@@ -729,11 +757,24 @@ body{
   
     }
    .filter-container{
-
+    display: flex;
+    flex-direction: row;
     height: 3%;
     width: 100%;
-    flex-direction: row;
     padding: 1rem;
+   }
+   .filter-content{
+
+
+   }
+   .filter-content h1{
+    display: none;
+   }
+   .academic-periods{
+    float: left;
+   }
+   .academic-level{
+    float: left;
    }
    .courses-grid{
     padding: .5rem;
