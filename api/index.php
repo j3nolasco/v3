@@ -734,7 +734,7 @@ body{
     background-color: darkolivegreen;
     color: white;
     box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
-    height: 5%;
+    height: 3%;
     width: 100%;
     flex-direction: row;
     padding: 2rem;
@@ -750,7 +750,7 @@ body{
     border-radius: .2rem;
     height: auto;
     width: 100%;
-    padding: 1rem;
+    padding: .5rem;
 
 }  
     .course-card_L{
@@ -760,9 +760,7 @@ body{
     
 }
     .indicator{
-    position:absolute;
-    bottom:1;
-    right:1;
+    display:none;
 }
     .course-card_R{
     margin-left:0;
