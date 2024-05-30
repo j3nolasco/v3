@@ -33,7 +33,7 @@ for( $i=0; $i < 1; $i++){
         <div class = "filter-container">
             <div class = "filter-content">
                 <h1 class = "filter">Filter</h1>
-                <input type="text" id="myInput" onkeyup="filterByName(this)" placeholder="Search for courses...">
+                <input class ="text"type="text" id="myInput" onkeyup="filterByName(this)" placeholder="Search for courses...">
                 <h1>academic-period</h1>
                 <select class="academic-periods" name="academic-periods" id="inputPeriod" >
                     <option value="<?=$Temp ?>" disabled selected> Select Academic Period </option>
@@ -769,6 +769,9 @@ body{
    }
    .filter-content h1{
     display: none;
+   }
+   .text{
+    font-size: 16px;
    }
    
    .academic-periods{
