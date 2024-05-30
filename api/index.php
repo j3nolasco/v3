@@ -717,6 +717,7 @@ body{
 }
     .course-catalog{
         display: inline-block;
+        
     }
    .left{ 
         width: 100%;
@@ -724,7 +725,7 @@ body{
 
     .right{
   
-       padding: .5rem;
+      
   
     }
    .filter-container{
@@ -738,6 +739,9 @@ body{
     flex-direction: row;
     padding: 2rem;
    }
+   .courses-grid{
+    padding: .5rem;
+}
    .course-card{
     display: block;
     vertical-align: middle;
