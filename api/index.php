@@ -725,19 +725,15 @@ body{
 
     .right{
   
-      
+      width: 93%;
   
     }
    .filter-container{
-    position: fixed !important;
-    
-    background-color: darkolivegreen;
-    color: white;
-    box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+
     height: 3%;
     width: 100%;
     flex-direction: row;
-    padding: 2rem;
+    padding: 1rem;
    }
    .courses-grid{
     padding: .5rem;
@@ -750,7 +746,7 @@ body{
     border-radius: .2rem;
     height: auto;
     width: 100%;
-    padding: .5rem;
+   
 
 }  
     .course-card_L{
@@ -760,7 +756,7 @@ body{
     
 }
     .indicator{
-    display:none;
+    display:none !important;
 }
     .course-card_R{
     margin-left:0;
