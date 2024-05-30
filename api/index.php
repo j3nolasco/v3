@@ -724,7 +724,7 @@ body{
 
     .right{
   
-       padding: .1rem;
+       padding: 1rem;
   
     }
    .filter-container{
