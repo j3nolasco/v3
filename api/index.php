@@ -642,7 +642,7 @@ body{
     gap: 1rem;
 }
 .course-card{
-    display: grid;
+    display: block;
     grid-template-columns: (2 ,1fr);
     background-color: lightgray;
     box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
@@ -652,11 +652,15 @@ body{
     padding: 1rem; 
     padding-top: .2rem !important;
     gap: 2rem;
-    float: left;
+    
 }  
 
 .course-card_L{
     grid-column: 1;
+    float: left;
+    margin-bottom: 1rem;
+
+    
 }
 .indicator{
    position:absolute;
@@ -664,7 +668,10 @@ body{
     right:1;
 }
 .course-card_R{
+    margin-left: 5rem;
+    margin-bottom: 1rem;
     grid-column: 2;
+    float: left;
 }
 
 .drill-down{
@@ -677,10 +684,13 @@ body{
     width: 700px;
     height: 700px;
     margin: auto;
+   
     
 }
-.drill-info{
-    padding: 1rem;
+.slide-info{
+    margin-top: 9rem;
+    list-style: none;
+    
 }
 .leave{
 
@@ -700,11 +710,67 @@ body{
 
 
 
-/* .course-card:hover  {
-   
-    transform: scale(1.1);
-    transition: all .4s ease-in-out;
-} */
+@media screen and (max-width: 430px){
+    .course-catalog{
+        display: inline-block;
+    }
+   .left{ 
+        width: 100%;
+   }
+
+    .right{
+  
+       
+  
+    }
+   .filter-container{
+    position: fixed !important;
+    
+    background-color: darkolivegreen;
+    color: white;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+    height: 5%;
+    width: 100%;
+    flex-direction: row;
+    padding: 2rem;
+   }
+   .course-card{
+    display: block;
+    vertical-align: middle;
+    background-color: lightgray;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 10%);
+    border-radius: .2rem;
+    height: auto;
+    width: 100%;
+    padding: 1rem;
+
+}  
+    .course-card_L{
+    grid-column: 1;
+    float: left;
+    margin-bottom: 0rem;
+
+    
+}
+    .indicator{
+    position:absolute;
+    bottom:1;
+    right:1;
+}
+    .course-card_R{
+    margin-left:0;
+    margin-bottom: 0rem;
+    grid-column: 2;
+    float: left;
+    
+}
+.slide-info{
+    margin-top: 14rem;
+    list-style: none;
+    
+}
+
+}
 </style>                           
 </body>
 </html>
