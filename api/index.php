@@ -725,7 +725,7 @@ body{
 
     .right{
   
-      width: 93%;
+      width: 92%;
   
     }
    .filter-container{
