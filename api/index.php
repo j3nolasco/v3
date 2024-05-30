@@ -711,6 +711,10 @@ body{
 
 
 @media screen and (max-width: 430px){
+    body{
+    margin: 0;
+    padding: 0;
+}
     .course-catalog{
         display: inline-block;
     }
@@ -720,7 +724,7 @@ body{
 
     .right{
   
-       
+       padding: .1rem;
   
     }
    .filter-container{
@@ -746,8 +750,7 @@ body{
 
 }  
     .course-card_L{
-    grid-column: 1;
-    float: left;
+
     margin-bottom: 0rem;
 
     
@@ -760,13 +763,13 @@ body{
     .course-card_R{
     margin-left:0;
     margin-bottom: 0rem;
-    grid-column: 2;
-    float: left;
+   
+  
     
 }
 .slide-info{
-    margin-top: 14rem;
-    list-style: none;
+    margin-top: 15rem;
+    
     
 }
 
