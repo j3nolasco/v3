@@ -801,6 +801,7 @@ body{
     .course-card_L{
 
     margin-bottom: 0rem;
+    margin-right: 5rem;
 
     
 }
@@ -808,7 +809,7 @@ body{
     display:none !important;
 }
     .course-card_R{
-    margin-left:0;
+    margin-left:0rem;
     margin-bottom: 0rem;
    
   
