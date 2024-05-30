@@ -759,7 +759,7 @@ body{
    .filter-container{
     display: flex;
     flex-direction: row;
-    height: 3%;
+    height: 4%;
     width: 100%;
     padding: 1rem;
    }
@@ -770,11 +770,16 @@ body{
    .filter-content h1{
     display: none;
    }
+   
    .academic-periods{
-    float: left;
+    width: 80px;
+    height: 40px;
+ 
    }
    .academic-level{
-    float: left;
+    width: 80px;
+    height: 40px;
+   
    }
    .courses-grid{
     padding: .5rem;
