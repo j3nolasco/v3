@@ -10,6 +10,13 @@ foreach($data as $key => $value){
   $arrayCount = count($value);
 } 
 $Rentry = $data['Report_Entry'];
+$Temp = "";
+for( $i=0; $i < 1; $i++){
+    $firstReport = $Rentry[$i];
+    $Temp = $firstReport['Academic_Period'];
+}
+
+
 
 ?>
 
@@ -29,7 +36,7 @@ $Rentry = $data['Report_Entry'];
                 <input type="text" id="myInput" onkeyup="filterByName(this)" placeholder="Search for courses...">
                 <h1>academic-period</h1>
                 <select name="academic-periods" id="inputPeriod" >
-                    <option value="" disabled selected> Select Academic Period </option>
+                    <option value="<?=$Temp ?>" disabled selected> Select Academic Period </option>
                 <?php
                          $new_array = array();
                          for ( $i = 0; $i < $arrayCount; $i++ ){
@@ -478,7 +485,8 @@ function filterByName(){
     const filter = Textinput.value.toUpperCase();
     const list =document.getElementById("list");
     var div = list.getElementsByClassName("course-card");
-    console.log(courseSerach)
+    var selected_Period = document.getElementById("inputPeriod").value.toUpperCase(); 
+    console.log(selected_Period);
     filterArray = [];
 
     serachValue =filter;
