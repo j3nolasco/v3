@@ -1,4 +1,5 @@
 <?php
+
 $jsonString = file_get_contents('Data.json', FILE_USE_INCLUDE_PATH);
 $data = json_decode($jsonString, true);
 $reportEntries = $data['Report_Entry']; 
@@ -76,6 +77,7 @@ for( $i=0; $i < 1; $i++){
                 <br></br>
                 <button onclick="resetValues()">reset</button>
                 <button class="print" onclick="printPage()">print</button>
+                <p id = "results"class ="results"></p>
             </div>
         </div>
     </section>
@@ -131,7 +133,7 @@ for( $i=0; $i < 1; $i++){
 
                                     <div class = "course-card_L">
                                         <h3  class = "course-listing"><?=$CourseListing ?></h3>
-                                        <p style = "display: inline;" class = "course-subjects"><?=$CourseSubjects ?> |</p> 
+                                        <p style = "display: inline;" class = "academic-period"><?=$AcademicPeriod ?> |</p> 
                                         <p style = "display: inline;" class = "delivery-mode">  <?=$DeliveryMode ?></p>
                                         <p  style = "display: none;" class = "Academic-Period"><?=$AcademicPeriod ?></p>
                                         <br></br>
@@ -145,7 +147,6 @@ for( $i=0; $i < 1; $i++){
                                           <p id = "indicator" class = "indicator">^</p> 
                                     </div>
                                     <div id = "slide-info"class = "slide-info" style="display:none">
-                                        <p> <?=$AcademicPeriod ?></p> 
                                         <p> <?=$StartDate ?></p> 
                                         <p> <?=$EndDate ?></p> 
                                         <p> <?=$CourseDescription ?></p>
@@ -489,6 +490,10 @@ function filterByName(){
     const list =document.getElementById("list");
     var div = list.getElementsByClassName("course-card");
     var selected_Period = document.getElementById("inputPeriod").value.toUpperCase(); 
+    var results =document.getElementById("results");
+    var num = 0; 
+    var txt =document.createTextNode(num);
+    
     console.log(selected_Period);
     filterArray = [];
 
@@ -508,7 +513,6 @@ function filterByName(){
                    
                 } else {
                     div[i].style.display = "none";
-                    
                 }
             }
         }
