@@ -786,6 +786,7 @@ body{
    }
    .courses-grid{
     padding: .5rem;
+    gap: 1rem;
 }
    .course-card{
     display: block;
