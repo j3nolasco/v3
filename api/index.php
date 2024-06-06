@@ -55,19 +55,19 @@ for( $i=0; $i < 1; $i++){
                          }?>
                 </select>
                 
-                <h1>Academic Level</h1>
+                <h1>Delivery Mode</h1>
                 <select class="academic-level" name="academic-level" id="inputAcademic"  >
-                    <option value="Undergraduate" disabled selected> Select Delivery Mode </option>
+                    <option value="In-Person" disabled selected> Select Delivery Mode </option>
                 <?php
                          $new_array = array();
                          for ( $i = 0; $i < $arrayCount; $i++ ){
                              $firstReport = $Rentry[$i];
-                             $AcademicLevel = $firstReport['Academic_Level'];
-                             if(!in_array($AcademicLevel, $new_array)){ 
-                                  $new_array[$i] = $AcademicLevel;
-                                  $AcademicLevel = $new_array[$i];
+                             $DeliveryMode = $firstReport['Delivery_Mode'];
+                             if(!in_array($DeliveryMode, $new_array)){ 
+                                  $new_array[$i] = $DeliveryMode;
+                                  $DeliveryMode = $new_array[$i];
                                   ?>
-                                  <option value="<?=$AcademicLevel ?>"><?=$AcademicLevel ?></option>"
+                                  <option value="<?=$DeliveryMode ?>"><?=$DeliveryMode ?></option>"
                                   <?php
                                 }
                              ?>                           
@@ -134,7 +134,7 @@ for( $i=0; $i < 1; $i++){
                                     <div class = "course-card_L">
                                         <h3  class = "course-listing"><?=$CourseListing ?></h3>
                                         <p style = "display: inline;" class = "academic-period"><?=$AcademicPeriod ?> |</p> 
-                                        <p style = "display: inline;" class = "delivery-mode">  <?=$DeliveryMode ?></p>
+                                        <p style = "display: inline;" class = "delivery-mode"><?=$DeliveryMode ?></p>
                                         <p  style = "display: none;" class = "Academic-Period"><?=$AcademicPeriod ?></p>
                                         <br></br>
                                         <p style = "display: inline;">Instructor | </p>
@@ -149,8 +149,11 @@ for( $i=0; $i < 1; $i++){
                                     <div id = "slide-info"class = "slide-info" style="display:none">
                                         <p> <?=$StartDate ?></p> 
                                         <p> <?=$EndDate ?></p> 
-                                        <p> <?=$CourseDescription ?></p>
-                                        <p> <?=$Requirements ?></p>       
+                                        <h4 style = "display: inline;">Course Description: </h4>
+                                        <p style = "display: inline;"> <?=$CourseDescription ?></p>
+                                        <br><br>
+                                        <h4 style = "display: inline;">Course Requirements</h4>
+                                        <p style = "display: inline;"> <?=$Requirements ?></p>       
                                     </div>
                                 </div>
                                
@@ -279,7 +282,7 @@ function resetValues(){
                   {
                       const h3 = filterArray[i].getElementsByTagName("h3")[0];
                       const p = filterArray[i].getElementsByTagName("p")[2];
-                      const als = filterArray[i].getElementsByTagName("p")[6];
+                      const als = filterArray[i].getElementsByTagName("p")[1];
                       
                    
                       if((p.innerHTML.toUpperCase() == selectedPeriod) && (als.innerHTML.toUpperCase() == selectedAcademic))
@@ -318,7 +321,7 @@ function resetValues(){
                   {
                       const h3 = div[i].getElementsByTagName("h3")[0];
                       const p = div[i].getElementsByTagName("p")[2];
-                      const als = div[i].getElementsByTagName("p")[6];
+                      const als = div[i].getElementsByTagName("p")[1];
                       
                    
                       if((p.innerHTML.toUpperCase() == selectedPeriod) && (als.innerHTML.toUpperCase() == selectedAcademic))
@@ -366,7 +369,7 @@ function resetValues(){
                 {
                     const h3 = filterArray[i].getElementsByTagName("h3")[0];
                     const ap = filterArray[i].getElementsByTagName("p")[2];
-                    const p = filterArray[i].getElementsByTagName("p")[6];
+                    const p = filterArray[i].getElementsByTagName("p")[1];
 
                         
                       if( (ap.innerHTML.toUpperCase() == selectedPeriod) && (p.innerHTML.toUpperCase() == selectedAcademic))
@@ -384,7 +387,7 @@ function resetValues(){
                 for(var i =0; i<filterArray.length; i++)
                 {
                
-                    const p = filterArray[i].getElementsByTagName("p")[6];
+                    const p = filterArray[i].getElementsByTagName("p")[1];
                     
                       if(p.innerHTML.toUpperCase() == selectedAcademic)
                       {
@@ -398,14 +401,14 @@ function resetValues(){
                 }
               }
               }else{
-                if(ap)
+            if(ap)
               {
 
                 for(var i =0; i<div.length; i++)
                 {
                     const h3 = div[i].getElementsByTagName("h3")[0];
                     const ap = div[i].getElementsByTagName("p")[2];
-                    const p = div[i].getElementsByTagName("p")[6];
+                    const p = div[i].getElementsByTagName("p")[1];
 
                         
                       if( (ap.innerHTML.toUpperCase() == selectedPeriod) && (p.innerHTML.toUpperCase() == selectedAcademic))
@@ -422,14 +425,15 @@ function resetValues(){
               }else{
                 for(var i =0; i<div.length; i++)
                 {
-               
-                    const p = div[i].getElementsByTagName("p")[6];
                     
+                    const p = div[i].getElementsByTagName("p")[1];
+                    //console.log("P: " +p.innerHTML.toUpperCase()+" search: " + selectedAcademic);
                       if(p.innerHTML.toUpperCase() == selectedAcademic)
                       {
                         div[i].style.display = "";
                         alSelection = p.innerHTML;
                         selected_Academic = selectedAcademic;
+                        console.log(div.length);
 
                       }else{
                         div[i].style.display = "none";
@@ -437,49 +441,6 @@ function resetValues(){
                 }
               }
               }   
-            }
-            if(selectionId === "inputMP")
-            {
-                mp = true;
-                if (dm || al ||ap){
-                    
-                    for(i = 0; i<div.length; i++)
-                  {
-                      const h3 = div[i].getElementsByTagName("h3")[0];
-                      const p = div[i].getElementsByTagName("p")[2];
-                      const dms = div[i].getElementsByTagName("p")[4];
-                      const als = div[i].getElementsByTagName("p")[10];
-                      
-                   
-                      if((p.innerHTML.toUpperCase() == selectedPeriod) && (dms.innerHTML.toUpperCase() == selectedMode) && (als.innerHTML.toUpperCase() == selectedAcademic))
-                      {
-                        div[i].style.display = "";
-                        apSelection = p.innerHTML;
-                        selected_Period =selectedPeriod;
-
-                      }else{
-                        div[i].style.display = "none";
-                      }
-                  } 
-                }else{
-                
-                  for(i = 0; i<div.length; i++)
-                  {
-                      const p = div[i].getElementsByTagName("p")[8];
-                      
-                       
-                      if(p.innerHTML.toUpperCase().indexOf(selectedPeriod) > -1)
-                      {
-                        div[i].style.display = "";
-                        apSelection = p.innerHTML;
-                        selected_Period =selectedPeriod;
-                        //console.log("P: "+p.innerHTML);
-
-                      }else{
-                        div[i].style.display = "none";
-                      }
-                  }    
-                }   
             }
           }, false);}
 
@@ -505,7 +466,7 @@ function filterByName(){
             const h3 = div[i].getElementsByTagName("h3")[0];
             const ap = div[i].getElementsByTagName("p")[2];
             const ins = div[i].getElementsByTagName("p")[4];
-            const als = div[i].getElementsByTagName("p")[6];   
+            const als = div[i].getElementsByTagName("p")[1];   
 
             if((h3)){
                 if(((h3.innerHTML.toUpperCase().indexOf(filter) > -1) ||  (ins.innerHTML.toUpperCase().indexOf(filter) > -1)) && (ap.innerHTML.toUpperCase() == selected_Period) && (als.innerHTML.toUpperCase() == selected_Academic)){
